@@ -1,7 +1,7 @@
 import Welcome from './components/Welcome';
 import Homepage from './components/Homepage';
 import Time from './components/Time';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 

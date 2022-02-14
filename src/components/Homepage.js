@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { auth, db } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import { uid } from "uid";
@@ -21,8 +21,7 @@ export default function Homepage() {
   const [tempUidd, setTempUidd] = useState("");
   const [time, setTime] = useState("");
   const [timeToComplete, setTimeToComplete] = useState("");
-  const [newTime, setNewTime] = useState("");
-  const [updateTime, setUpdatTime] = useState("");
+  const [setNewTime] = useState("");
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -40,6 +39,7 @@ export default function Homepage() {
           if (data !== null) {
             Object.values(data).map((todo) => {
               setTodos((oldArray) => [...oldArray, todo]);
+              return console.log("todo");
             });
           }
         });
@@ -47,7 +47,7 @@ export default function Homepage() {
         navigate("/");
       }
     });
-  }, []);
+  });
 
   const handleSignOut = () => {
     signOut(auth)
@@ -58,8 +58,6 @@ export default function Homepage() {
         alert(err.message);
       });
   };
-
-  let createNewTime = moment(date).add(time, 'days').format('YYYY-MM-DD');
 
   // add
   const writeToDatabase = () => {
@@ -124,6 +122,8 @@ export default function Homepage() {
 
 var date = new Date()
 console.log(date)
+
+let createNewTime = moment(date).add(time, 'days').format('YYYY-MM-DD');
 
 var checkDate = moment().format('YYYY-MM-DD')
 console.log("check date", checkDate)

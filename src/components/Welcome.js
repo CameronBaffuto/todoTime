@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { signInWithEmailAndPassword, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase.js'
 import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
@@ -28,7 +28,7 @@ export default function Welcome() {
                 navigate('/homepage')
             }
         })
-    }, [])
+    })
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
@@ -68,31 +68,31 @@ export default function Welcome() {
                 <Col></Col>
                 <Col md={6}>
            <div className="text-center"> 
-            <StopwatchFill className="mb-4" color="#577D6B" size={60} />    
+            <StopwatchFill className="mb-4" color="#EBA521" size={60} />    
             <h1 className="text-center">Welcome to Todo Time</h1>
            </div> 
         <div>
             {isRegistering ? (
                 <>
             <Form>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicEmailC">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" onChange={handleEmailChange} value={email} placeholder="Enter email" value={registerInformation.email} onChange={(e) => setRegisterInformation({...registerInformation, email: e.target.value})}/>
+                    <Form.Control type="email" placeholder="Enter email" value={registerInformation.email} onChange={(e) => setRegisterInformation({...registerInformation, email: e.target.value})}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmailC">
                     <Form.Label>Confirm email</Form.Label>
-                    <Form.Control type="email" onChange={handleEmailChange} value={email} placeholder="Confirm Email" value={registerInformation.confirmEmail} onChange={(e) => setRegisterInformation({...registerInformation, confirmEmail: e.target.value})}/>
+                    <Form.Control type="email" placeholder="Confirm Email" value={registerInformation.confirmEmail} onChange={(e) => setRegisterInformation({...registerInformation, confirmEmail: e.target.value})}/>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3" controlId="formBasicPasswordC">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" onChange={handlePasswordChange} value={password} placeholder="Password" value={registerInformation.password} onChange={(e) => setRegisterInformation({...registerInformation, password: e.target.value})}/>
+                    <Form.Control type="password" placeholder="Password" value={registerInformation.password} onChange={(e) => setRegisterInformation({...registerInformation, password: e.target.value})}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPasswordC">
                     <Form.Label>Confirm password</Form.Label>
-                    <Form.Control type="password" onChange={handlePasswordChange} value={password} placeholder="Confirm Password" value={registerInformation.confirmPassword} onChange={(e) => setRegisterInformation({...registerInformation, confirmPassword: e.target.value})} />
+                    <Form.Control type="password" placeholder="Confirm Password" value={registerInformation.confirmPassword} onChange={(e) => setRegisterInformation({...registerInformation, confirmPassword: e.target.value})} />
                 </Form.Group>
                 <Button className="orange" variant="light" onClick={handleRegister}>Register</Button>
                 
