@@ -39,7 +39,6 @@ export default function Homepage() {
           if (data !== null) {
             Object.values(data).map((todo) => {
               setTodos((oldArray) => [...oldArray, todo]);
-              return console.log("todo");
             });
           }
         });
@@ -47,7 +46,7 @@ export default function Homepage() {
         navigate("/");
       }
     });
-  });
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth)
