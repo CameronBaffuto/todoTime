@@ -31,6 +31,7 @@ export default function Homepage() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleAlertClose = () => setAlert(false);
 
   const navigate = useNavigate()
 
@@ -211,7 +212,7 @@ console.log("check date", checkDate)
         </Modal.Footer>
       </Modal>
       </div>
-      <Modal show={alert} onHide={handleClose}>
+      <Modal show={alert} onHide={handleAlertClose}>
         <Modal.Header closeButton>
         <Modal.Title>Are you sure you want to reset this task?</Modal.Title>
         </Modal.Header>
