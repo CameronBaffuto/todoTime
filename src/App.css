@@ -59,3 +59,9 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.addButton {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+}

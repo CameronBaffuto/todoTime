@@ -13,6 +13,9 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import { PlusCircleFill } from 'react-bootstrap-icons';
 import { StopwatchFill } from "react-bootstrap-icons";
+import { CheckCircleFill } from "react-bootstrap-icons";
+import { PencilFill } from "react-bootstrap-icons";
+import { TrashFill } from "react-bootstrap-icons";
 
 export default function Homepage() {
   const [todo, setTodo] = useState("");
@@ -145,9 +148,9 @@ console.log("check date", checkDate)
         </Navbar>
 
         <Container className="my-5 pb-5">
-      <div className="py-4">
+      <div className="py-2">
          
-        <PlusCircleFill onClick={handleShow} className="position-fixed" color="#577D6B" size={60}/>
+        <PlusCircleFill onClick={handleShow} className="addButton" color="#577D6B" size={60}/>
 
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -199,7 +202,7 @@ console.log("check date", checkDate)
                 </div>
             )} */}
 
-            <div className="m-5">
+            <div className="m-4">
         {
             todos
             .sort(({ time: previousTime }, { time: currentTime }) => previousTime - currentTime)
@@ -222,9 +225,9 @@ console.log("check date", checkDate)
                     <h5 className="pb-2 px-4">Due: <Moment diff={date} unit="days">{todo.newTime}</Moment> days</h5>
                     <h5 className="pb-2 px-4">Time to Complete: {todo.timeToComplete}</h5>
                         <div className="d-flex justify-content-end">
-                            <Button className="yellow mx-1" variant="light" onClick={() => handleReset(todo)}>Done</Button>
-                            <Button className="orange mx-1" variant="light" onClick={() => handleUpdate(todo)}>Edit</Button>
-                            <Button className="darkOrange mx-1" variant="light" onClick={() => handleDelete(todo.uidd)}>Delete</Button>
+                            <Button className="yellow mx-1" variant="light" onClick={() => handleReset(todo)}>Done <CheckCircleFill/></Button>
+                            <Button className="orange mx-1" variant="light" onClick={() => handleUpdate(todo)}>Edit <PencilFill/></Button>
+                            <Button className="darkOrange mx-1" variant="light" onClick={() => handleDelete(todo.uidd)}>Delete <TrashFill/></Button>
                         </div>
                     </div>
                 )}
@@ -239,7 +242,7 @@ console.log("check date", checkDate)
         <div className="darkGreen text-center p-2" fixed="bottom">   
                     <p>Todo Time © {new Date().getFullYear()}</p>
                         
-                    <p>Developed by: <a href="https://www.cambaffuto.com" className="footerLink">Cam Baffuto</a></p>          
+                    <p>Developed by: <a href="https://www.cambaffuto.com" rel="noopener noreferrer nofollow" target="_blank" className="footerLink">Cam Baffuto</a></p>          
         </div>
     </div>
     
