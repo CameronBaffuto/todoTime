@@ -25,7 +25,9 @@ export default function Homepage() {
   const [time, setTime] = useState("");
   const [timeToComplete, setTimeToComplete] = useState("");
   const [setNewTime] = useState("");
+  const [bucketList, setBucketList] = useState("");
   const [show, setShow] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -70,14 +72,17 @@ export default function Homepage() {
       time: time,
       timeToComplete: timeToComplete,
       newTime: createNewTime,
-      uidd: uidd
+      uidd: uidd,
+      bucketList: bucketList,
     });
 
     setTodo("");
     setTime("");
     setTimeToComplete("");
+    setBucketList("");
     setShow(false);
   };
+
 
   // update
   const handleUpdate = (todo) => {
@@ -89,6 +94,7 @@ export default function Homepage() {
     setTimeToComplete(todo.timeToComplete);
     setTempUidd(todo.uidd);
     setNewTime(updateTime);
+    setBucketList(todo.bucketList);
   };
 
   const handleEditConfirm = () => {
@@ -97,23 +103,38 @@ export default function Homepage() {
       time: time,
       timeToComplete: timeToComplete,
       tempUidd: tempUidd,
-      newTime: createNewTime
+      newTime: createNewTime,
+      bucketList: bucketList,
     });
 
     setTodo("");
     setTime("");
     setTimeToComplete("");
+    setBucketList("");
     setIsEdit(false);
     setShow(false);
   };
 
-  const handleReset = (todo) => {
-    console.log('The checkbox was toggled');
+  const handleResetAlert = (todo) => {
     let resetTime = moment(date).add(todo.time, 'days').format('YYYY-MM-DD');
+    setAlert(true);
+    setTodo(todo.todo);
+    setTime(todo.time);
+    setTempUidd(todo.uidd);
+    setNewTime(resetTime);
+    alert("Are you sure you want to reset this todo?");
+  }
+
+  const handleReset = () => {
+    console.log('The checkbox was toggled');
     update(ref(db, `/${auth.currentUser.uid}/${tempUidd}`), {
-        newTime: resetTime
+      todo: todo,
+      time: time,
+      tempUidd: tempUidd,
+      newTime: createNewTime,
     })
     console.log('Time was updated');
+    setAlert(false);
 
   }
 
@@ -170,6 +191,10 @@ console.log("check date", checkDate)
                 <Form.Label>How Long to Complete?</Form.Label>
                 <Form.Control type="text" placeholder="Time to Complete" value={timeToComplete} onChange={(e) => setTimeToComplete(e.target.value)} />
             </Form.Group>
+            {/* <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Bucket</Form.Label>
+                <Form.Control type="text" placeholder="Which Bucket" value={bucketList} onChange={(e) => setBucketList(e.target.value)} />
+            </Form.Group> */}
         </Form>    
         </Modal.Body>
         <Modal.Footer>
@@ -186,6 +211,28 @@ console.log("check date", checkDate)
         </Modal.Footer>
       </Modal>
       </div>
+      <Modal show={alert} onHide={handleClose}>
+        <Modal.Header closeButton>
+        <Modal.Title>Are you sure you want to reset this task?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Task Name</Form.Label>
+                <Form.Control type="text" placeholder="Task..." value={todo} onChange={(e) => setTodo(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Days to reset</Form.Label>
+                <Form.Control type="number" placeholder="Days..." value={time} onChange={(e) => setTime(e.target.value)} />
+            </Form.Group>
+        </Form>    
+        </Modal.Body>
+        <Modal.Footer>
+                <div>
+                    <Button className="orange" variant="light" onClick={handleReset}>Confirm</Button>
+                </div>
+        </Modal.Footer>
+      </Modal>
      
         {/* <input type="text" placeholder="Add Task..." value={todo} onChange={(e) => setTodo(e.target.value)} />
         <input type="number" placeholder="Select Days..." value={time} onChange={(e) => setTime(e.target.value)}/>
@@ -214,9 +261,9 @@ console.log("check date", checkDate)
                     <h5 className="pb-2 px-4">Due: <span className="red m-1 p-2 rounded">Now</span></h5>
                     <h5 className="pb-2 px-4">Time to Complete: {todo.timeToComplete}</h5>
                         <div className="d-flex justify-content-end">
-                            <Button className="yellow mx-1" variant="light" onClick={() => handleReset(todo)}>Done</Button>
-                            <Button className="orange mx-1" variant="light" onClick={() => handleUpdate(todo)}>Edit</Button>
-                            <Button className="darkOrange mx-1" variant="light" onClick={() => handleDelete(todo.uidd)}>Delete</Button>
+                            <Button className="yellow mx-1" variant="light" onClick={() => handleResetAlert(todo)}>Done <CheckCircleFill/></Button>
+                            <Button className="orange mx-1" variant="light" onClick={() => handleUpdate(todo)}>Edit <PencilFill/></Button>
+                            <Button className="darkOrange mx-1" variant="light" onClick={() => handleDelete(todo.uidd)}>Delete <TrashFill/></Button>
                         </div>
                     </div>
                 ) : (
@@ -225,7 +272,7 @@ console.log("check date", checkDate)
                     <h5 className="pb-2 px-4">Due: <Moment diff={date} unit="days">{todo.newTime}</Moment> days</h5>
                     <h5 className="pb-2 px-4">Time to Complete: {todo.timeToComplete}</h5>
                         <div className="d-flex justify-content-end">
-                            <Button className="yellow mx-1" variant="light" onClick={() => handleReset(todo)}>Done <CheckCircleFill/></Button>
+                            <Button className="yellow mx-1" variant="light" onClick={() => handleResetAlert(todo)}>Done <CheckCircleFill/></Button>
                             <Button className="orange mx-1" variant="light" onClick={() => handleUpdate(todo)}>Edit <PencilFill/></Button>
                             <Button className="darkOrange mx-1" variant="light" onClick={() => handleDelete(todo.uidd)}>Delete <TrashFill/></Button>
                         </div>
@@ -239,7 +286,7 @@ console.log("check date", checkDate)
         
         </Container>
         
-        <div className="darkGreen text-center p-2" fixed="bottom">   
+        <div className="footer">   
                     <p>Todo Time © {new Date().getFullYear()}</p>
                         
                     <p>Developed by: <a href="https://www.cambaffuto.com" rel="noopener noreferrer nofollow" target="_blank" className="footerLink">Cam Baffuto</a></p>          
