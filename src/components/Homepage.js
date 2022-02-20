@@ -152,10 +152,6 @@ let createNewTime = moment(date).add(time, 'days').format('YYYY-MM-DD');
 var checkDate = moment().format('YYYY-MM-DD')
 console.log("check date", checkDate)
 
-// var newDate = moment(date).add(time, 'days').format('YYYY-MM-DD');
-// console.log("new date", newDate)
-
-
 
   return (
     <div>
@@ -234,32 +230,21 @@ console.log("check date", checkDate)
                 </div>
         </Modal.Footer>
       </Modal>
-     
-        {/* <input type="text" placeholder="Add Task..." value={todo} onChange={(e) => setTodo(e.target.value)} />
-        <input type="number" placeholder="Select Days..." value={time} onChange={(e) => setTime(e.target.value)}/>
-        <input type="text" placeholder="Time to Complete" value={timeToComplete} onChange={(e) => setTimeToComplete(e.target.value)}/>
-        
-        {
-            isEdit ? (
-                <div>
-                    <button onClick={handleEditConfirm}>Confirm</button>
-                </div>
-            ) : (
-                <div>
-                    <button onClick={writeToDatabase}>Add</button>
-                </div>
-            )} */}
 
             <div className="m-4">
         {
             todos
-            .sort(({ time: previousTime }, { time: currentTime }) => previousTime - currentTime)
+            .sort(function(a, b) {
+              var dateA = new Date(a.newTime), dateB = new Date(b.newTime);
+              return dateA - dateB;
+          })
             .map(todo => (
                 <div>
-                { checkDate === todo.newTime ? ( 
+                { moment(checkDate).isSameOrAfter(todo.newTime) ? ( 
                     <div className="p-3 my-4 rounded shadow-lg text-light midGreen">
                     <h1 className="pb-2 px-4">{todo.todo}</h1>    
                     <h5 className="pb-2 px-4">Due: <span className="red m-1 p-2 rounded">Now</span></h5>
+                    <h5 className="pb-2 px-4 d-none">Due: <Moment diff={date} unit="days">{todo.newTime}</Moment> days</h5>
                     <h5 className="pb-2 px-4">Time to Complete: {todo.timeToComplete}</h5>
                         <div className="d-flex justify-content-end">
                             <Button className="yellow mx-1" variant="light" onClick={() => handleResetAlert(todo)}>Done <CheckCircleFill/></Button>
