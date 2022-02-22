@@ -98,19 +98,9 @@ export default function Welcome() {
                 
                 <Button variant="link" onClick={() => setIsRegistering(false)}>Go Back</Button>
             </Form>
-            {/* <input type="email" onChange={handleEmailChange} value={email} placeholder="Email" value={registerInformation.email} onChange={(e) => setRegisterInformation({...registerInformation, email: e.target.value})}/>
-            <input type="email" onChange={handleEmailChange} value={email} placeholder="Confirm Email" value={registerInformation.confirmEmail} onChange={(e) => setRegisterInformation({...registerInformation, confirmEmail: e.target.value})}/>
-            <input type="password" onChange={handlePasswordChange} value={password} placeholder="Password" value={registerInformation.password} onChange={(e) => setRegisterInformation({...registerInformation, password: e.target.value})}/>
-            <input type="password" onChange={handlePasswordChange} value={password} placeholder="Confirm Password" value={registerInformation.confirmPassword} onChange={(e) => setRegisterInformation({...registerInformation, confirmPassword: e.target.value})}/>
-            <button onClick={handleRegister}>Register</button>
-            <button onClick={() => setIsRegistering(false)}>Go Back</button> */}
                 </>
             ):(
                 <> 
-            {/* <input type="email" onChange={handleEmailChange} value={email} placeholder="Email"/>
-            <input type="password" onChange={handlePasswordChange} value={password} placeholder="Password"/>
-            <button onClick={handleSignIn}>Sign In</button>
-            <button onClick={() => setIsRegistering(true)}>Create an account</button> */}
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
