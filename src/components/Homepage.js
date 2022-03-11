@@ -16,6 +16,8 @@ import { StopwatchFill } from "react-bootstrap-icons";
 import { CheckCircleFill } from "react-bootstrap-icons";
 import { PencilFill } from "react-bootstrap-icons";
 import { TrashFill } from "react-bootstrap-icons";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default function Homepage() {
   const [todo, setTodo] = useState("");
@@ -295,7 +297,16 @@ console.log("check date", checkDate)
             </div>
         
         </Container>
-        
+        <div className="footer text-center"> 
+          <Row>
+            <Col md={6}>
+              <p>Todo Time © {new Date().getFullYear()}</p>
+            </Col>
+            <Col md={6}>
+              <p>Developed by: <a href="https://www.cambaffuto.com" rel="noopener noreferrer nofollow" target="_blank" className="footerLink">Cam Baffuto</a></p>    
+            </Col>              
+          </Row>  
+        </div>
     </div>
     
 
