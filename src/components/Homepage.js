@@ -3,7 +3,7 @@ import { signOut } from "firebase/auth";
 import { auth, db } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import { uid } from "uid";
-import { set, ref, onValue, remove, update } from "firebase/database";
+import { set, ref, onValue, remove, update, push } from "firebase/database";
 import Moment from 'react-moment';
 import moment from 'moment';
 import Navbar from 'react-bootstrap/Navbar'
@@ -25,7 +25,7 @@ export default function Homepage() {
   const [time, setTime] = useState("");
   const [timeToComplete, setTimeToComplete] = useState("");
   const [setNewTime] = useState("");
-  const [bucketList, setBucketList] = useState("");
+  // const [bucketList, setBucketList] = useState("");
   const [show, setShow] = useState(false);
   const [alert, setAlert] = useState(false);
 
@@ -74,15 +74,25 @@ export default function Homepage() {
       timeToComplete: timeToComplete,
       newTime: createNewTime,
       uidd: uidd,
-      bucketList: bucketList,
+      // bucketList: bucketList,
     });
 
     setTodo("");
     setTime("");
     setTimeToComplete("");
-    setBucketList("");
+    // setBucketList("");
     setShow(false);
   };
+
+  // // add bucket
+  // const writeBucket = () => {
+  //   push(ref(db, `/${auth.currentUser.uid}/`), {
+  //     bucketList: bucketList,
+  //   });
+
+  //   setBucketList("");
+  //   setShow(false);
+  // };
 
 
   // update
@@ -95,7 +105,7 @@ export default function Homepage() {
     setTimeToComplete(todo.timeToComplete);
     setTempUidd(todo.uidd);
     setNewTime(updateTime);
-    setBucketList(todo.bucketList);
+    // setBucketList(todo.bucketList);
   };
 
   const handleEditConfirm = () => {
@@ -105,13 +115,13 @@ export default function Homepage() {
       timeToComplete: timeToComplete,
       tempUidd: tempUidd,
       newTime: createNewTime,
-      bucketList: bucketList,
+      // bucketList: bucketList,
     });
 
     setTodo("");
     setTime("");
     setTimeToComplete("");
-    setBucketList("");
+    // setBucketList("");
     setIsEdit(false);
     setShow(false);
   };
@@ -167,7 +177,21 @@ console.log("check date", checkDate)
 
         <Container className="my-5 pb-5">
       <div className="py-2">
-         
+
+    {/* <div className="pt-3">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Bucket</Form.Label>
+                <Form.Control type="text" placeholder="Which Bucket" value={bucketList} onChange={(e) => setBucketList(e.target.value)} />
+      </Form.Group>
+      <Form.Select>
+        { todos.map(todo => 
+            <option value={todo.bucketList}>{todo.bucketList}</option>
+          )
+        }
+      </Form.Select>
+      <Button className="orange" variant="light" onClick={writeBucket}>Add New Bucket</Button>
+    </div> */}
+
         <PlusCircleFill onClick={handleShow} className="addButton" color="#577D6B" size={60}/>
 
         <Modal show={show} onHide={handleClose}>
@@ -272,7 +296,7 @@ console.log("check date", checkDate)
         
         </Container>
         
-        <div className="footer">   
+        <div className="footer fixed-bottom">   
                     <p className="px-2">Todo Time © {new Date().getFullYear()}</p>
                         
                     <p className="px-2">Developed by: <a href="https://www.cambaffuto.com" rel="noopener noreferrer nofollow" target="_blank" className="footerLink">Cam Baffuto</a></p>          

@@ -63,7 +63,7 @@ body {
 .addButton {
     position: fixed;
     bottom: 8%;
-    right: 5%;
+    right: 3%;
 }
 
 .footer {
@@ -76,4 +76,5 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
