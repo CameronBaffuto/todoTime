@@ -296,7 +296,7 @@ console.log("check date", checkDate)
         
         </Container>
         
-        <div className="footer fixed-bottom">   
+        <div className="footer">   
                     <p className="px-2">Todo Time © {new Date().getFullYear()}</p>
                         
                     <p className="px-2">Developed by: <a href="https://www.cambaffuto.com" rel="noopener noreferrer nofollow" target="_blank" className="footerLink">Cam Baffuto</a></p>          
