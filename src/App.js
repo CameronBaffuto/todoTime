@@ -16,7 +16,7 @@ function App() {
           <Route path="/homepage" element={<Homepage />} />
         </Routes>
       </Router>
-      <div className="footer fixed-bottom text-center"> 
+      <div className="footer text-center"> 
           <Row>
             <Col md={6}>
               <p>Todo Time © {new Date().getFullYear()}</p>
