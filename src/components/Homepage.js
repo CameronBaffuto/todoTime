@@ -256,7 +256,7 @@ console.log("check date", checkDate)
                 </div>
         </Modal.Footer>
       </Modal>
-
+         { todos.length !== 0 ? (
             <div className="m-4">
         {
             todos
@@ -265,7 +265,7 @@ console.log("check date", checkDate)
               return dateA - dateB;
           })
             .map(todo => (
-                <div>
+                <div className="pb-5">
                 { moment(checkDate).isSameOrAfter(todo.newTime) ? ( 
                     <div className="p-3 my-4 rounded shadow-lg text-light midGreen">
                     <h1 className="pb-2 px-4">{todo.todo}</h1>    
@@ -294,10 +294,17 @@ console.log("check date", checkDate)
                 </div>
             ))
         }
-            </div>
-        
+          </div>
+          ) : (
+
+    <div className="m-4">
+        <div className="p-3 my-4 rounded shadow-lg text-light text-center">
+            <h1 className="pb-2 px-4">No Tasks</h1>
+        </div>
+    </div>
+          )}
         </Container>
-        <div className="footer text-center"> 
+        <div className="footer text-center fixed-bottom"> 
           <Row>
             <Col md={6}>
               <p>Todo Time © {new Date().getFullYear()}</p>

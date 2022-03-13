@@ -62,7 +62,7 @@ body {
 
 .addButton {
     position: fixed;
-    bottom: 8%;
+    bottom: 12%;
     right: 3%;
 }
 
@@ -70,7 +70,10 @@ body {
     padding: 1rem;
     padding-top: 1rem;
     width: 100%;
-    height: 8%;
+    height: 10%;
+    /* left:0;
+    bottom:0;
+    right:0;  */
     background-color: #203C37;
     color: #FFF;
     display: flex;
